@@ -1,32 +1,20 @@
-using TMPro;
 using UnityEngine;
+using TMPro;
 
 [RequireComponent(typeof(TextMeshProUGUI))]
-public class HealthTextView : MonoBehaviour
+public class HealthTextView : HealthView
 {
-    [SerializeField] private Health _health;
-
     private TextMeshProUGUI _text;
     private string _separator = "/";
 
     private void Awake()
     {
         _text = GetComponent<TextMeshProUGUI>();
-        _text.text = _health.MaxHealth + _separator + _health.MaxHealth;
+        _text.text = Health.MaxHealth + _separator + Health.MaxHealth;
     }
 
-    private void OnEnable()
+    protected override void ChangeValue(int newValue)
     {
-        _health.ChangeValue += ChangeValue;
-    }
-
-    private void OnDisable()
-    {
-        _health.ChangeValue -= ChangeValue;
-    }
-
-    private void ChangeValue(int newValue)
-    {
-        _text.text = newValue + _separator + _health.MaxHealth;
+        _text.text = newValue + _separator + Health.MaxHealth;
     }
 }

@@ -1,24 +1,20 @@
-using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
+using UnityEngine;
 
 public class HealthBarSmooth : HealthBar
 {
-    private float _numberHitPointsBeforeDelay = 1f;
-    private float _delay = 0.02f;
-    private WaitForSeconds _waitForChangeValue;
+    private float _rateOfChange = 40f;
     private Coroutine _coroutine;
 
     private void Awake()
     {
         InitializingSlider();
-        _waitForChangeValue = new WaitForSeconds(_delay);
     }
 
     protected override void ChangeValue(int newValue)
     {
         if (_coroutine != null)
-            StopAllCoroutines();
+            StopCoroutine(_coroutine);
 
         _coroutine = StartCoroutine(SmoothChangeValue(newValue));
     }
@@ -27,9 +23,9 @@ public class HealthBarSmooth : HealthBar
     {
         while (Slider.value != newValue)
         {
-            Slider.value = Mathf.MoveTowards(Slider.value, newValue, _numberHitPointsBeforeDelay);
+            Slider.value = Mathf.MoveTowards(Slider.value, newValue, _rateOfChange * Time.deltaTime);
 
-            yield return _waitForChangeValue;
+            yield return null;
         }
     }
 }
