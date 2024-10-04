@@ -8,13 +8,8 @@ public class HealthBar : HealthView
 
     private void Awake()
     {
-        InitializingSlider();
-    }
-
-    protected void InitializingSlider()
-    {
         Slider = GetComponent<Slider>();
-        Slider.maxValue = Health.MaxHealth;
+        Slider.maxValue = Health.MaxValue;
         Slider.value = Slider.maxValue;
     }
 

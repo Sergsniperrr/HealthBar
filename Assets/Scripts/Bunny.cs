@@ -29,6 +29,6 @@ public class Bunny : MonoBehaviour
 
     private void TakeHealing()
     {
-        _health.Heal(_healthPerHeal);
+        _health.TakeHealing(_healthPerHeal);
     }
 }

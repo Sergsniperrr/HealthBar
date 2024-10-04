@@ -6,11 +6,6 @@ public class HealthBarSmooth : HealthBar
     private float _rateOfChange = 40f;
     private Coroutine _coroutine;
 
-    private void Awake()
-    {
-        InitializingSlider();
-    }
-
     protected override void ChangeValue(int newValue)
     {
         if (_coroutine != null)
